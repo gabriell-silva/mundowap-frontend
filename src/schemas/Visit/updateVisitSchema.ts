@@ -5,6 +5,7 @@ export const updateVisitSchema = yup.object({
   amount_form: yup.string().required("Qtd. Formulários é obrigatório"),
   amount_products: yup.string().required("Qtd. Produtos é obrigatório"),
   duration: yup.number(),
+  completed: yup.string(),
   address: yup.object({
     zip_code: yup.string().required("Data é obrigatório"),
     uf: yup.string(),

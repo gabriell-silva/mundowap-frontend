@@ -25,10 +25,13 @@ export default function ModalUpdateVisit({visit}: {visit: Visit}) {
     setValue,
     handleSubmit,
     reset,
+    watch,
     formState: { errors },    
   } = useForm({
     resolver: yupResolver(updateVisitSchema),
   });
+
+  const visitCompleted = watch('completed');
 
   const handleRequestViaCep = async (zipCode: string) => {
     try {
@@ -116,6 +119,7 @@ export default function ModalUpdateVisit({visit}: {visit: Visit}) {
         date: visit.date,
         amount_form: visit.amount_form,
         amount_products: visit.amount_products,
+        completed: visit.completed === '1' ? '1' : '0',
         address: {
           zip_code: visit.address.zip_code,
           uf: visit.address.uf,
@@ -143,6 +147,7 @@ export default function ModalUpdateVisit({visit}: {visit: Visit}) {
           <Input
             label="Data da visita"
             type="date"
+            disabled={visitCompleted === "1" ? true : false}
             {...register("date")}
             error={errors?.date}
           />
@@ -153,6 +158,7 @@ export default function ModalUpdateVisit({visit}: {visit: Visit}) {
               type="number"
               min="0"
               style={{ width: "238px" }}
+              disabled={visitCompleted === "1" ? true : false}
               {...register("amount_form")}
               error={errors?.amount_form}
             />
@@ -162,6 +168,7 @@ export default function ModalUpdateVisit({visit}: {visit: Visit}) {
               type="number"
               min="0"
               style={{ width: "238px" }}
+              disabled={visitCompleted === "1" ? true : false}
               {...register("amount_products")}
               error={errors?.amount_products}
             />
@@ -228,6 +235,7 @@ export default function ModalUpdateVisit({visit}: {visit: Visit}) {
         <ButtonSubmit 
           form="form-update-visit"
           style={{ width: "492px" }}
+          disabled={visitCompleted === "1" ? true : false}
         >
           Atualizar
         </ButtonSubmit>
