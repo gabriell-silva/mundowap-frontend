@@ -1,3 +1,13 @@
 import { CreateVisitSchemaType } from "../schemas/Visit/createVisitSchema";
 
-export type Visit = CreateVisitSchemaType & {}
+type Visit = CreateVisitSchemaType & {}
+
+type VisitGroup = {
+  date: string,
+  visits: Array<Visit> 
+}
+
+export type {
+  Visit,
+  VisitGroup
+}

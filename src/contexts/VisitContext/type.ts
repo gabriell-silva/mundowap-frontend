@@ -1,10 +1,5 @@
 import React from "react";
-import { Visit } from "../../@types/Visit";
-
-type VisitGroup = {
-  date: string;
-  visits: Array<Visit>;
-};
+import { Visit, VisitGroup } from "../../@types/Visit";
 
 type VisitsContextData = {
   visits: Array<Visit>;
@@ -22,9 +17,7 @@ type VisitsProviderProps = {
   children: React.ReactNode;
 }
 
-
 export type {
-  VisitGroup,
   VisitsContextData,
   VisitsProviderProps
 }
