@@ -3,7 +3,7 @@ import * as yup from "yup";
 export const createVisitSchema = yup.object({
   id: yup.number().nullable(),
   date: yup.string().required("Data é obrigatório"),
-  completed: yup.string().required("Status é obrigatório"),
+  completed: yup.string(),
   amount_form: yup.string().required("Qtd. Formulários é obrigatório"),
   amount_products: yup.string().required("Qtd. Produtos é obrigatório"),
   duration: yup.number().nullable(),

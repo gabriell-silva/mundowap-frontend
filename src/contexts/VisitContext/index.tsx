@@ -2,6 +2,7 @@ import React from 'react';
 import dayjs from 'dayjs';
 import { VisitsContextData, VisitsProviderProps } from './type';
 import { Visit, VisitGroup } from '../../@types/Visit';
+import handleAccessStorage from '../../function/accessStorage';
 
 const VisitsContext = React.createContext<VisitsContextData>({} as VisitsContextData);
 
@@ -15,19 +16,24 @@ export function VisitsProvider({ children }: VisitsProviderProps) {
     return totalDuration;
   };
 
-  const handleValidateDuration = (newVisit: Visit, existingVisits: Array<Visit>, existingVisitId?: number) => {
-    const totalDuration = existingVisits.reduce((acc, visit) => {
-      if (existingVisitId && visit.id === existingVisitId) {
+  const handleValidateDuration = (
+    visit: Visit,
+    groupVisits: Array<Visit>,
+    visitById?: number
+  ) => {
+    const totalDuration = groupVisits.reduce((acc, visit) => {
+      if (visitById && visit.id === visitById) {
         return acc;
       }
+
       return acc + Number(visit.duration);
-    }, 0) + Number(newVisit.duration);
+    }, 0);
 
     if (totalDuration > 480) {
       throw new Error('A duração total das visitas não pode exceder 480 minutos (8 horas).');
     }
 
-    if (Number(newVisit.duration) < 5) {
+    if (Number(visit.duration) < 5) {
       throw new Error('A duração da visita deve conter no mínimo 5 minutos.');
     }
   };
@@ -64,9 +70,7 @@ export function VisitsProvider({ children }: VisitsProviderProps) {
       setVisits(updatedVisits);
       setGroupedVisits(handleGroupVisitsByDate(updatedVisits));
       
-      localStorage.setItem('visits', JSON.stringify(updatedVisits));
-      
-      window.dispatchEvent(new Event('storage'));
+      handleAccessStorage<Array<Visit>>(updatedVisits);
     } catch (error) {
       throw error;
     }
@@ -86,8 +90,7 @@ export function VisitsProvider({ children }: VisitsProviderProps) {
       setVisits(updatedVisits);
       setGroupedVisits(handleGroupVisitsByDate(updatedVisits));
       
-      localStorage.setItem('visits', JSON.stringify(updatedVisits));
-      window.dispatchEvent(new Event('storage'));
+      handleAccessStorage<Array<Visit>>(updatedVisits);
     } catch (error) {
       throw error;
     }
@@ -102,8 +105,7 @@ export function VisitsProvider({ children }: VisitsProviderProps) {
       setVisits(updatedVisits);
       setGroupedVisits(handleGroupVisitsByDate(updatedVisits));
       
-      localStorage.setItem('visits', JSON.stringify(updatedVisits));
-      window.dispatchEvent(new Event('storage'));
+      handleAccessStorage<Array<Visit>>(updatedVisits);
     } catch (error) {
       throw error;
     }
@@ -125,11 +127,9 @@ export function VisitsProvider({ children }: VisitsProviderProps) {
       setVisits(updatedVisits);
       setGroupedVisits(handleGroupVisitsByDate(updatedVisits));
       
-      localStorage.setItem('visits', JSON.stringify(updatedVisits));
-      window.dispatchEvent(new Event('storage'));
+      handleAccessStorage<Array<Visit>>(updatedVisits);
       return true;
     } catch (error) {
-      console.error("Erro ao atualizar status do grupo de visitas:", error);
       throw error;
     }
   };

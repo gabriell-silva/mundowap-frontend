@@ -1,3 +1,3 @@
-export function formatZipCode(zipCode: string) {
+export default function formatZipCode(zipCode: string) {
   return zipCode.replace(/(\d{5})(\d{3})/, "$1-$2");
 }
