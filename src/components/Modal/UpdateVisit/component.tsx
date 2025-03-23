@@ -13,6 +13,7 @@ import useFetch from "../../../hooks/useFetch";
 import { ToastContainer, toast } from "react-toastify"
 import { useVisits } from "../../../contexts/VisitContext";
 import { Visit } from "../../../@types/Visit";
+import ButtonAction from "../../Button/Action/component";
 
 export default function ModalUpdateVisit({visit}: {visit: Visit}) {
   const {closeModal} = useModal();
@@ -232,12 +233,20 @@ export default function ModalUpdateVisit({visit}: {visit: Visit}) {
           </FlexRow>
         </FlexColumn>
 
-        <ButtonSubmit 
-          form="form-update-visit"
-          style={{ width: "492px" }}
-        >
-          Atualizar
-        </ButtonSubmit>
+        <FlexRow style={{ justifyContent: "flex-end"}}>
+          <ButtonAction
+            style={{ width: "114px", backgroundColor: "#EF4B6E" }}
+            onClick={closeModal}
+          >
+            Cancelar
+          </ButtonAction>
+          <ButtonSubmit 
+            form="form-update-visit"
+            style={{ width: "114px" }}
+          >
+            Atualizar
+          </ButtonSubmit>
+        </FlexRow>
       </FlexColumn>
     </React.Fragment>
   );
