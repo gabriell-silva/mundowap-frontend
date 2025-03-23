@@ -1,9 +1,7 @@
-import React from "react";
-import { Visit, VisitGroup } from "../../../@types/Visit";
+import { Visit } from "../../../@types/Visit";
 import { Container } from "../../../Layout/Header/style";
-import { Box, FlexColumn, FlexRow } from "../../../style/default";
+import { Box } from "../../../style/default";
 import ButtonAction from "../../Button/Action/component";
-import Progressbar from "../../ProgressBar/component";
 import Title from "../../Title/component";
 import { DataTableComponent } from "../component";
 import dayjs from 'dayjs';
@@ -11,6 +9,9 @@ import 'dayjs/locale/pt-br';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { useVisits } from "../../../contexts/VisitContext";
 import { useModal } from "../../../contexts/ModalContext";
+import Header from "./Header/component";
+import Footer from "./Footer/component";
+import React from "react";
 
 dayjs.extend(customParseFormat);
 dayjs.locale('pt-br');
@@ -19,9 +20,7 @@ export default function DataTableVisits() {
   const { 
     groupedVisits,
     loading,
-    handleCalculateDuration,
     handleUpdateVisitStatus,
-    handleUpdateGroupStatus
   } = useVisits();
   const { openModal } = useModal();
 
@@ -91,72 +90,26 @@ export default function DataTableVisits() {
     },
   ];
 
-  const Header = ({ group, style }: { group: VisitGroup; style: React.CSSProperties }) => {
-    const totalDuration = handleCalculateDuration(group);
-    const completedVisits = group.visits.filter(visit => visit.completed === "1").length;
-    const completionPercentage = Math.min((completedVisits / group.visits.length) * 100, 100);
-
-    return (
-      <FlexRow style={{ justifyContent: 'space-between', alignItems: 'center', ...style }}>
-        <Title>
-          {group.date}
-        </Title>
-
-        <FlexColumn>
-          <span style={{ fontSize: 12, color: '#666' }}>
-            {`Duração: ${totalDuration}min / 480min (${Math.min((totalDuration / 480) * 100, 100).toFixed(2)}%)`}
-          </span>
-
-          <Progressbar value={completionPercentage} />
-        </FlexColumn>
-      </FlexRow>
-    );
-  };
-
   if (loading) {
     return <Container><Title>Carregando visitas...</Title></Container>;
   }
 
-  const Footer = ({group}: {group: VisitGroup}) => {
-    const rowCount = group.visits.length
-
-    return (
-      <FlexRow 
-        style={{
-          backgroundColor: '#10101010',
-          borderRadius: '0px 0px 8px 8px',
-          borderTop: '1px solid #10101020',
-          justifyContent: 'space-between',
-          alignItems:'center',
-          padding: '10px 8px',
-        }}
-      >
-        <span>Total de visitas: {rowCount}</span>
-        <ButtonAction
-          style={{ padding: 12, fontSize: 14 }}
-          disabled={group.visits.every(visit => visit.completed === "1") && handleCalculateDuration(group) == 480}
-          onClick={() => handleUpdateGroupStatus(group.date, "1")}
-        >
-          Fechar visitas do dia
-        </ButtonAction>
-      </FlexRow>
-    );
-  }
-
   return (
-    <Container>
-      <Title>Visitas</Title>
+    <React.Fragment>
+      {!!groupedVisits.length && <Container>
+        <Title>Visitas</Title>
 
-      {groupedVisits?.map(group => (
-        <Box key={group.date} style={{ margin: "25px 0px" }}>
-          <Header group={group} style={{textTransform: "capitalize"}} />
-          <DataTableComponent<Visit>
-            columns={columns}
-            data={group.visits}
-            footerComponent={() => Footer({group})}
-          />
-        </Box>
-      ))}
-    </Container>
+        {groupedVisits?.map(group => (
+          <Box key={group.date} style={{ margin: "25px 0px" }}>
+            <Header group={group} style={{textTransform: "capitalize"}} />
+            <DataTableComponent<Visit>
+              columns={columns}
+              data={group.visits}
+              footerComponent={() => Footer({group})}
+            />
+          </Box>
+        ))}
+      </Container>}
+    </React.Fragment>
   );
 }
