@@ -4,7 +4,7 @@ import Input from "../../FormControl/Input/component";
 import { useForm } from "react-hook-form";
 import { createVisitSchema, CreateVisitSchemaType } from "../../../schemas/Visit/createVisitSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Box, FlexColumn, FlexRow } from "../../../style/default";
+import { FlexColumn, FlexRow } from "../../../style/default";
 import ButtonSubmit from "../../Button/Submit/component";
 import { CloseButton } from "../style";
 import { useModal } from "../../../contexts/ModalContext";
@@ -70,6 +70,7 @@ export default function ModalCreateVisit() {
       const formDataWithId = {
         ...formData,
         id: Math.ceil(Math.random() * 1000000),
+        completed: "0",
         duration: (Number(formData.amount_form) * 15) + (Number((formData.amount_products)) * 5)
       };
       
@@ -114,46 +115,12 @@ export default function ModalCreateVisit() {
 
       <FlexColumn>
         <FlexColumn as={"form"} id="form-create-visit" onSubmit={handleSubmit(onSubmitVisit)}>
-          <FlexRow>
-            <Input
-              label="Data da visita"
-              type="date"
-              {...register("date")}
-              error={errors?.date}
-              style={{ width: "250px"}}
-            />
-
-            <Box>
-              <label>Status da visita</label>
-
-              <FlexRow style={{alignItems: "center"}}>
-                <FlexRow style={{alignItems: "center"}}>
-                  <Input
-                    type="radio"
-                    name="completed"
-                    onChange={() => setValue("completed", "1")}
-                    error={errors?.completed}
-                    style={{ width: "16px"}}
-                  />
-
-                  <span style={{ fontSize: "14px" }}>Concluída</span>
-                </FlexRow>
-
-                <FlexRow style={{alignItems: "center"}}>
-                  <Input
-                    type="radio"
-                    name="completed"
-                    onChange={() => setValue("completed", "0")}
-                    error={errors?.completed}
-                    style={{ width: "16px" }}
-                  />
-
-                  <span style={{ fontSize: "14px" }}>Não concluída</span>
-                </FlexRow>
-              </FlexRow>
-            </Box>
-          </FlexRow>
-
+          <Input
+            label="Data da visita"
+            type="date"
+            {...register("date")}
+            error={errors?.date}
+          />
           <FlexRow>
             <Input
               label="Quantidade de formulários"
