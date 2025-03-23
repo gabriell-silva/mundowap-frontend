@@ -11,19 +11,19 @@ export default function Header() {
         <FlexRow>
           <div>
             <Image 
-                src="/logo-mw.png"
-                alt="mundo-wap"
-                width={100}
-                height={50}
+              src="/logo-mw.png"
+              alt="mundo-wap"
+              width={100}
+              height={50}
             />
           </div>
 
           <div>
-              <ButtonAction
-                onClick={() => openModal({name: "modal-create-visit"})}
-              >
-                Nova visita
-              </ButtonAction>
+            <ButtonAction
+              onClick={() => openModal({name: "modal-create-visit"})}
+            >
+              Nova visita
+            </ButtonAction>
           </div>
         </FlexRow>
       </Container>

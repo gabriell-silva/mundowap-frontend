@@ -4,7 +4,7 @@ import Input from "../../FormControl/Input/component";
 import { useForm } from "react-hook-form";
 import { updateVisitSchema, UpdateVisitSchemaType } from "../../../schemas/Visit/updateVisitSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Box, FlexColumn, FlexRow } from "../../../style/default";
+import { FlexColumn, FlexRow } from "../../../style/default";
 import ButtonSubmit from "../../Button/Submit/component";
 import { CloseButton } from "../style";
 import { useModal } from "../../../contexts/ModalContext";
@@ -222,7 +222,7 @@ export default function ModalUpdateVisit({visit}: {visit: Visit}) {
               error={errors?.address?.street}
               isDisabled={disabled}
             />
-              <Input
+            <Input
               label="Número"
               type="text"
               style={{ width: "238px" }}

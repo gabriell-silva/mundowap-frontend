@@ -13,7 +13,7 @@ const FlexRow = styled.div`
 `;
 
 const Box = styled.div`
-    width: "100%",
+  width: "100%",
 `;
 
 export {
