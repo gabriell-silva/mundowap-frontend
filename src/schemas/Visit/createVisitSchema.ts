@@ -9,8 +9,8 @@ export const createVisitSchema = yup.object({
   duration: yup.number().nullable(),
   address: yup.object({
     zip_code: yup.string().required("CEP é obrigatório"),
-    uf: yup.string(),
-    city: yup.string(),
+    uf: yup.string().required("Estado é obrigatório"),
+    city: yup.string().required("Cidade é obrigatório"),
     neighborhood: yup.string().required("Bairro é obrigatório"),
     street: yup.string().required("Logradouro é obrigatório"),
     street_number: yup.string().required("Número é obrigatório")
