@@ -6,7 +6,7 @@ export const ButtonStyle = styled.button<ButtonProps>`
   border-radius: 4px;
   border: none;
   color: white;
-  padding: 15px 32px;
+  padding: 12px 28px;
   text-align: center;
   text-decoration: none;
   display: inline-block;

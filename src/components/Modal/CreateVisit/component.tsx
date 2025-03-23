@@ -13,6 +13,7 @@ import useFetch from "../../../hooks/useFetch";
 import { ToastContainer, toast } from "react-toastify"
 import { useVisits } from "../../../contexts/VisitContext";
 import dayjs from "dayjs";
+import ButtonAction from "../../Button/Action/component";
 
 export default function ModalCreateVisit() {
   const {closeModal} = useModal();
@@ -201,12 +202,22 @@ export default function ModalCreateVisit() {
           </FlexRow>
         </FlexColumn>
 
-        <ButtonSubmit 
-          form="form-create-visit"
-          style={{ width: "492px" }}
-        >
-          Cadastrar
-        </ButtonSubmit>
+        <FlexRow style={{ justifyContent: "flex-end"}}>
+          <ButtonAction
+            style={{ width: "114px", backgroundColor: "#EF4B6E" }}
+            onClick={closeModal}
+          >
+            Cancelar
+          </ButtonAction>
+
+          <ButtonSubmit 
+            form="form-create-visit"
+            style={{ width: "114px" }}
+          >
+            Cadastrar
+          </ButtonSubmit>
+        </FlexRow>
+
       </FlexColumn>
     </React.Fragment>
   );
