@@ -1,7 +1,7 @@
 import React from 'react';
 import dayjs from 'dayjs';
-import { VisitGroup, VisitsContextData, VisitsProviderProps } from './type';
-import { Visit } from '../../@types/Visit';
+import { VisitsContextData, VisitsProviderProps } from './type';
+import { Visit, VisitGroup } from '../../@types/Visit';
 
 const VisitsContext = React.createContext<VisitsContextData>({} as VisitsContextData);
 
