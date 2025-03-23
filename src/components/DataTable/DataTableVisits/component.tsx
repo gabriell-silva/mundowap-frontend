@@ -61,28 +61,34 @@ export default function DataTableVisits() {
       width: "300px"
     },
     {
+      name: 'Status',
+      cell: (row: Visit) => (
+        <ButtonAction
+          style={{ padding: 10, fontSize: 14, backgroundColor: row.completed === "1" ? '#4CAF50' : '#999' }}
+          disabled={row.completed === "1"}
+          onClick={() => {
+            if(!row.id) return;
+            
+            const newStatus = row.completed === "1" ? "0" : "1";
+            handleUpdateVisitStatus(row.id, newStatus);
+          }}
+        >
+          {row.completed === "1" ? 'Concluído' : 'Pendente'}
+        </ButtonAction>
+      ),
+      sortable: true,
+      wrap: false,
+      grow: 0.7
+    },
+    {
       name: 'Ações',
       cell: (row: Visit) => (
-        <div>
-            <ButtonAction
-              style={{ padding: 10, fontSize: 14, backgroundColor: row.completed === "1" ? '#4CAF50' : '#999' }}
-              disabled={row.completed === "1"}
-              onClick={() => {
-                if(!row.id) return;
-                
-                const newStatus = row.completed === "1" ? "0" : "1";
-                handleUpdateVisitStatus(row.id, newStatus);
-              }}
-            >
-              {row.completed === "1" ? 'Concluído' : 'Pendente'}
-            </ButtonAction>
-          <ButtonAction
-            style={{ padding: 10, fontSize: 14 }}
-            onClick={() => openModal({name: "modal-update-visit", props: {visit: row}})}
-          >
-            Editar
-          </ButtonAction>
-        </div>
+        <ButtonAction
+          style={{ padding: 10, fontSize: 14 }}
+          onClick={() => openModal({name: "modal-update-visit", props: {visit: row}})}
+        >
+          Editar
+        </ButtonAction>
       ),
       sortable: true,
       wrap: false,
