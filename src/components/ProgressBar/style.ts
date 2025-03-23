@@ -34,7 +34,7 @@ export const ProgressbarFill = styled.div`
 export const ProgressText = styled.span`
   position: absolute;
   right: 10px;
-  color: #777;
+  color: #555;
   font-weight: bold;
   font-size: 12px;
 `;

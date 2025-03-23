@@ -9,7 +9,7 @@ export default function Progressbar({ value }: { value: number}) {
     } else if (value > 90) {
       return '#4BEF6E';
     } else {
-      return '#4B6EFF';
+      return '#7D9EFA';
     }
   }
 
