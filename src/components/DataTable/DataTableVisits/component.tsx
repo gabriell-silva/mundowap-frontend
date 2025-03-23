@@ -93,7 +93,8 @@ export default function DataTableVisits() {
 
   const Header = ({ group, style }: { group: VisitGroup; style: React.CSSProperties }) => {
     const totalDuration = handleCalculateDuration(group);
-    const completionPercentage = Math.min((totalDuration / 480) * 100, 100);
+    const completedVisits = group.visits.filter(visit => visit.completed === "1").length;
+    const completionPercentage = Math.min((completedVisits / group.visits.length) * 100, 100);
 
     return (
       <FlexRow style={{ justifyContent: 'space-between', alignItems: 'center', ...style }}>
