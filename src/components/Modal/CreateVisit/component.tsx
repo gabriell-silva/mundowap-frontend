@@ -12,12 +12,14 @@ import { ResponseViacep } from "../../../@types/ResponseViacep";
 import useFetch from "../../../hooks/useFetch";
 import { ToastContainer, toast } from "react-toastify"
 import { useVisits } from "../../../contexts/VisitContext";
+import dayjs from "dayjs";
 
 export default function ModalCreateVisit() {
   const {closeModal} = useModal();
   const { handleCreateVisit } = useVisits();
   const [request] = useFetch<ResponseViacep>();
   const [disabled, setDisabled] = React.useState<boolean>(true);
+  const today = dayjs().format('YYYY-MM-DD');
 
   const {
     register,
@@ -102,7 +104,6 @@ export default function ModalCreateVisit() {
     }
   };
 
-
   return (
     <React.Fragment>
       <ToastContainer />
@@ -118,6 +119,8 @@ export default function ModalCreateVisit() {
           <Input
             label="Data da visita"
             type="date"
+            min={today}
+            defaultValue={today}
             {...register("date")}
             error={errors?.date}
           />
