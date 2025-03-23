@@ -235,7 +235,6 @@ export default function ModalUpdateVisit({visit}: {visit: Visit}) {
         <ButtonSubmit 
           form="form-update-visit"
           style={{ width: "492px" }}
-          disabled={visitCompleted === "1" ? true : false}
         >
           Atualizar
         </ButtonSubmit>
