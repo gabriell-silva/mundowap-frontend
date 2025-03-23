@@ -8,7 +8,7 @@ export const createVisitSchema = yup.object({
   amount_products: yup.string().required("Qtd. Produtos é obrigatório"),
   duration: yup.number().nullable(),
   address: yup.object({
-    zip_code: yup.string().required("Data é obrigatório"),
+    zip_code: yup.string().required("CEP é obrigatório"),
     uf: yup.string(),
     city: yup.string(),
     neighborhood: yup.string().required("Bairro é obrigatório"),

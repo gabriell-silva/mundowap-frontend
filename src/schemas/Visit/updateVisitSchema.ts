@@ -7,7 +7,7 @@ export const updateVisitSchema = yup.object({
   duration: yup.number(),
   completed: yup.string(),
   address: yup.object({
-    zip_code: yup.string().required("Data é obrigatório"),
+    zip_code: yup.string().required("CEP é obrigatório"),
     uf: yup.string(),
     city: yup.string(),
     neighborhood: yup.string().required("Bairro é obrigatório"),
