@@ -1,5 +1,5 @@
 import React from "react";
-import { Visit } from "../../../@types/Visit";
+import { Visit, VisitGroup } from "../../../@types/Visit";
 import { Container } from "../../../Layout/Header/style";
 import { Box, FlexColumn, FlexRow } from "../../../style/default";
 import ButtonAction from "../../Button/Action/component";
@@ -14,11 +14,6 @@ import { useModal } from "../../../contexts/ModalContext";
 
 dayjs.extend(customParseFormat);
 dayjs.locale('pt-br');
-
-type VisitGroup = {
-  date: string,
-  visits: Array<Visit> 
-}
 
 export default function DataTableVisits() {
   const { 
